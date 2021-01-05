@@ -6,6 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+    - name: Decrypt config file
+      run: ./docker/decryptsecret.sh
+      env:
+        CONFIG_PASSPHRASE: ${{ secrets.CONFIG_PASSPHRASE }}
 
     - run: docker build . -t dmi-tcat:${{ github.sha }}
       
